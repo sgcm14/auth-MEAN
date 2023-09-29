@@ -1,73 +1,141 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Auth App
+========
+- Este proyecto se realizó siguiendo el curso [Angular: De cero a experto](https://www.udemy.com/course/angular-fernando-herrera/# "Angular: De cero a experto") 
+> En este proyecto se usó Nest
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+  `POST` /auth/login
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+    REQUEST BODY:
 
-## Description
+     * email (required)
+     * password (required)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+Request Samples:
 
-```bash
-$ npm install
-```
+| Key           | Value                          |
+| ------------- | ------------------------------ |
+| `email`       | fernando@gooe.com              |
+| `password`    | 123456                         |
 
-## Running the app
+Response samples:
 
-```bash
-# development
-$ npm run start
+    {
+        "user": {
+            "_id": "651389d9d89b35156ea801fb",
+            "email": "fernando@gooe.com",
+            "name": "fernando",
+            "isActive": true,
+            "roles": [
+                "user"
+            ],
+            "__v": 0
+        },
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTM4OWQ5ZDg5YjM1MTU2ZWE4MDFmYiIsImlhdCI6MTY5NTk1NjI0NSwiZXhwIjoxNjk1OTc3ODQ1fQ.44g0exwFdxcX5TEdX4M-zJkHkUspZwtdP-MbI7KJHlo"
+    }
 
-# watch mode
-$ npm run start:dev
+Failed:
 
-# production mode
-$ npm run start:prod
-```
+    {
+        "message": "Not valid credentials - email",
+        "error": "Unauthorized",
+        "statusCode": 401
+    }
 
-## Test
+    {
+        "message": "Not valid credentials - password",
+        "error": "Unauthorized",
+        "statusCode": 401
+    }
 
-```bash
-# unit tests
-$ npm run test
+  `POST` /auth/register
 
-# e2e tests
-$ npm run test:e2e
+    REQUEST BODY:
 
-# test coverage
-$ npm run test:cov
-```
+     * name (required)
+     * email (required)
+     * password (required)
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Request Samples:
 
-## Stay in touch
+| Key           | Value                          |
+| ------------- | ------------------------------ |
+| `name`        | John Doe                       |
+| `email`       | user1@email.com              |
+| `password`    | 123456                         |
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Response samples:
 
-## License
+    {
+    "user": {
+        "email": "user1@email.com",
+        "name": "John Doe",
+        "isActive": true,
+        "roles": [
+            "user"
+        ],
+        "_id": "65163fef9a4fd0fcad9a1fd1",
+        "__v": 0
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTYzZmVmOWE0ZmQwZmNhZDlhMWZkMSIsImlhdCI6MTY5NTk1Njk3NSwiZXhwIjoxNjk1OTc4NTc1fQ.T3_eV6H-nxaqrSsx9Gree_tUIlUwm_-dnhZnq-CrMBM"
+    }
 
-Nest is [MIT licensed](LICENSE).
+Failed:
+
+    {
+      "message": "user1@email.com already exist!",
+      "error": "Bad Request",
+      "statusCode": 400
+    }
+
+
+`GET` /auth/check-token
+
+    Authorization:
+
+     * token (required)
+
+
+Request Samples:
+
+    Type (Bearer)
+    Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTYzZmVmOWE0ZmQwZmNhZDlhMWZkMSIsImlhdCI6MTY5NTk1Njk3NSwiZXhwIjoxNjk1OTc4NTc1fQ.T3_eV6H-nxaqrSsx9Gree_tUIlUwm_-dnhZnq-CrMBM
+
+Response samples:
+
+    {
+      "user": {
+          "_id": "65163fef9a4fd0fcad9a1fd1",
+          "email": "user1@email.com",
+          "name": "John Doe",
+          "isActive": true,
+          "roles": [
+              "user"
+          ],
+          "__v": 0
+      },
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MTYzZmVmOWE0ZmQwZmNhZDlhMWZkMSIsImlhdCI6MTY5NTk1NzU5MiwiZXhwIjoxNjk1OTc5MTkyfQ.YUBJcVIRY3_MlJb4ahhV7_Nu6gLNl18zmU8ADqvICls"
+    }
+
+Failed:
+
+    {
+      "message": "Unauthorized",
+      "statusCode": 401
+    }
+
+    {
+    "message": "There is no bearer token",
+    "error": "Unauthorized",
+    "statusCode": 401
+}
+
+En la siguiente captura se muestra la BD
+![](https://github.com/sgcm14/auth-MEAN/blob/main/src/doc/Pantalla1.PNG)
+> Pantalla de **BD**
+
+
+**Realizado por :** Sammy Gigi Cantoral Montejo (sgcm14)
+
+<img src ="https://raw.githubusercontent.com/sgcm14/sgcm14/main/sammy.jpg" width="200">
