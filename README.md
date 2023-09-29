@@ -132,7 +132,7 @@ Failed:
 }
 
 En la siguiente captura se muestra la BD
-![](https://github.com/sgcm14/auth-MEAN/blob/main/src/doc/Pantalla1.PNG)
+![](https://github.com/sgcm14/auth-MEAN/blob/main/src/doc/Pantalla.PNG)
 > Pantalla de **BD**
 
 
